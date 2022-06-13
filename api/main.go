@@ -1,10 +1,9 @@
 package main
 
 import (
-	"github.com/janusz-chludzinski/pricer/router"
+	"github.com/janusz-chludzinski/pricer/server"
 )
 
 func main() {
-	apiRouter := router.InitRoutes()
-	apiRouter.Run()
+	server.Start()
 }

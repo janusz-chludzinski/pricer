@@ -1,17 +1,10 @@
 package main
 
 import (
-	"net/http"
-
-	"github.com/gin-gonic/gin"
+	"github.com/janusz-chludzinski/pricer/router"
 )
 
 func main() {
-	router := gin.Default()
-	router.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusCreated, gin.H{
-			"message": "pong",
-		})
-	})
-	router.Run()
+	apiRouter := router.InitRoutes()
+	apiRouter.Run()
 }

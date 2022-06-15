@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Kler Accessories Zegar ścienny czarny",
+    "url": "https://sklep.kler.eu/dekoracje-salonu/zegary/kler-accessories-zegar-scienny-czarny",
+    "search-scope": ".s-productPrice"
+  },
+  {
+    "name": "Zegar wiszący Like Umbrella",
+    "url": "https://www.sfmeble.pl/p/zegar-wiszacy-like-umbrella-o100-cm-czarny",
+    "search-scope": "[data-test-id='product-price']"
+  },
+  {
+    "name": "Talerz Swirl Ø27 cm niebieski",
+    "url": "https://www.sfmeble.pl/p/talerz-swirl-o27-cm-niebieski",
+    "search-scope": "[data-test-id='product-price']"
+  },
+  {
+    "name": "Talerz głęboki Swirl Ø21 cm niebieski",
+    "url": "https://www.sfmeble.pl/p/talerz-gleboki-swirl-o21-cm-niebieski",
+    "search-scope": "[data-test-id='product-price']"
+  },
+  {
+    "name": "Talerz Swirl Ø19 cm niebieski",
+    "url": "https://www.sfmeble.pl/p/talerz-swirl-o19-cm-niebieski",
+    "search-scope": "[data-test-id='product-price']"
+  },
+  {
+    "name": "Miska Swirl Ø14x8 cm niebieska",
+    "url": "https://www.sfmeble.pl/p/miska-swirl-o14x8-cm-niebieska",
+    "search-scope": "[data-test-id='product-price']"
+  }
+]

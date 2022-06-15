@@ -4,23 +4,22 @@ import (
 	"time"
 )
 
-type ProductRequestInfo struct {
+type ProductRequest struct {
 	Name  string `json:"name"`
 	Url   string `json:"url"`
 	Scope string `json:"search-scope"`
 }
 
-type ParsingResult struct {
-	Name         string
-	Price        string
-	Url          string
-	VisitedOn    time.Time
-	Errored      bool
-	ErrorMessage string
+type Product struct {
+	Request      ProductRequest `json:"request"`
+	Price        string         `json:"price"`
+	VisitedOn    time.Time      `json:"visitedOn"`
+	Errored      bool           `json:"errored"`
+	ErrorMessage string         `json:"errorMessage"`
 }
 
 type CollectorConfig struct {
-	Product ProductRequestInfo
-	Result  *ParsingResult
-	Results []*ParsingResult
+	Product ProductRequest
+	Result  Product
+	Results []Product
 }

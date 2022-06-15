@@ -8,26 +8,18 @@ import (
 	"github.com/janusz-chludzinski/pricer/types"
 )
 
-func Parse(products []types.ProductRequestInfo) []*types.ParsingResult {
-	results := make([]*types.ParsingResult, 0, len(products))
+func Parse(requests []types.ProductRequest) []*types.Product {
+	products := mapRequestsToProducts(requests)
+	collectProducts(products)
 
-	for _, product := range products {
-		collectorConfig := types.CollectorConfig{Product: product, Results: results}
-		collector := setupCollector(collectorConfig)
-		collector.Visit(product.Url)
-	}
-
-	return results
+	return products
 }
 
-func setupCollector(config types.CollectorConfig) *colly.Collector {
-	result := types.ParsingResult{
-		VisitedOn: time.Now(),
-		Name:      config.Product.Name,
-		Url:       config.Product.Url,
-	}
+func parseAndCollect() {}
 
-	collector := colly.NewCollector()
+func setupCollector(product *types.Product) *colly.Collector {
+
+	collector := colly.NewCollector(colly.Async(true))
 
 	collector.OnRequest(func(r *colly.Request) {
 		log.Println("Visiting", r.URL)
@@ -35,19 +27,39 @@ func setupCollector(config types.CollectorConfig) *colly.Collector {
 
 	collector.OnError(func(_ *colly.Response, err error) {
 		log.Println("Something went wrong:", err)
-		result.Errored = true
-		result.ErrorMessage = err.Error()
+		product.Errored = true
+		product.ErrorMessage = err.Error()
 	})
 
-	collector.OnHTML(config.Product.Scope, func(e *colly.HTMLElement) {
-		log.Println("Price: ", config.Product.Name, e.Text)
-		result.Price = e.Text
+	collector.OnHTML(product.Request.Scope, func(e *colly.HTMLElement) {
+		log.Println("Price: ", product.Request.Name, e.Text)
+		product.Price = e.Text
+
 	})
 
 	collector.OnScraped(func(r *colly.Response) {
 		log.Println("Finished", r.Request.URL)
-		config.Results = append(config.Results, &result)
 	})
 
 	return collector
+}
+
+func createProduct(request types.ProductRequest) *types.Product {
+	return &types.Product{Request: request, VisitedOn: time.Now()}
+}
+
+func mapRequestsToProducts(requests []types.ProductRequest) []*types.Product {
+	products := make([]*types.Product, 0, len(requests))
+	for _, request := range requests {
+		products = append(products, createProduct(request))
+	}
+	return products
+}
+
+func collectProducts(products []*types.Product) {
+	for _, product := range products {
+		collector := setupCollector(product)
+		collector.Visit(product.Request.Url)
+		collector.Wait()
+	}
 }

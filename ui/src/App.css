@@ -28,6 +28,12 @@
   color: #61dafb;
 }
 
+.Spinner {
+  position: absolute;
+  display: flex;
+  border: 1px solid red;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

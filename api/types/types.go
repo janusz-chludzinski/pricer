@@ -7,7 +7,7 @@ import (
 type ProductRequest struct {
 	Name  string `json:"name"`
 	Url   string `json:"url"`
-	Scope string `json:"search-scope"`
+	Scope string `json:"searchScope"`
 }
 
 type Product struct {
@@ -16,10 +16,4 @@ type Product struct {
 	VisitedOn    time.Time      `json:"visitedOn"`
 	Errored      bool           `json:"errored"`
 	ErrorMessage string         `json:"errorMessage"`
-}
-
-type CollectorConfig struct {
-	Product ProductRequest
-	Result  Product
-	Results []Product
 }

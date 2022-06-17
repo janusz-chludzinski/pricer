@@ -23,6 +23,13 @@
   transform: translate(-50%, -50%);
 }
 
+.h2-heading {
+  text-align: left;
+  margin: 20px 0 40px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #676c6c38;
+}
+
 .navbar-wrap {
   background-color: #e3f2fd;
 }

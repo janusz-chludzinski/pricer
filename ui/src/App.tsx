@@ -5,7 +5,7 @@ import { Main } from "./components/mainframe/content/Content";
 
 function App() {
   return (
-    <div className="App container-fluid h-100">
+    <div className="app container-fluid d-flex flex-column">
       <Header />
       <Main />
     </div>

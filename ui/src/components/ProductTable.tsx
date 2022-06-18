@@ -50,13 +50,15 @@ export const ProductTable = () => {
                   onClick={() => window.open(product.request.url)}
                   key={key}
                 >
-                  <td>{product.request.name}</td>
-                  <td>{product.price}</td>
-                  <td>{formatDate(product.visitedOn)}</td>
+                  <td className="align-middle">{product.request.name}</td>
+                  <td className="align-middle">{product.price}</td>
+                  <td className="align-middle">
+                    {formatDate(product.visitedOn)}
+                  </td>
                   <td className={resolveStatusIcon(product.errored)}>
                     {productScrappingStatus(product.errored)}
                   </td>
-                  <td className="text-center">
+                  <td className="text-center align-middle">
                     <button type="button" className="btn btn-primary">
                       See product
                     </button>
@@ -75,7 +77,9 @@ function productScrappingStatus(errored: boolean) {
 }
 
 function resolveStatusIcon(errored: boolean) {
-  return errored ? "text-center text-danger" : "text-center text-success";
+  return errored
+    ? "text-center align-middle text-danger"
+    : "text-center align-middle text-success";
 }
 
 function formatDate(date: Date) {

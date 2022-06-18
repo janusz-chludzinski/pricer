@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Product } from "../types/Types";
 import { CheckMarkIcon, ErrorIcon, ThreeDotsIcon } from "./icons/Icons";
@@ -51,7 +52,7 @@ export const ProductTable = () => {
                 >
                   <td>{product.request.name}</td>
                   <td>{product.price}</td>
-                  <td>{product.visitedOn.toString()}</td>
+                  <td>{formatDate(product.visitedOn)}</td>
                   <td className={resolveStatusIcon(product.errored)}>
                     {productScrappingStatus(product.errored)}
                   </td>
@@ -75,4 +76,8 @@ function productScrappingStatus(errored: boolean) {
 
 function resolveStatusIcon(errored: boolean) {
   return errored ? "text-center text-danger" : "text-center text-success";
+}
+
+function formatDate(date: Date) {
+  return moment(date).format("DD-MM-YYYY HH:mm:ss");
 }

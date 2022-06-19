@@ -28,5 +28,20 @@
     "name": "Miska Swirl Ø14x8 cm niebieska",
     "url": "https://www.sfmeble.pl/p/miska-swirl-o14x8-cm-niebieska",
     "search-scope": "[data-test-id='product-price']"
+  },
+  {
+    "name": "Naklejany Zegar ścienny 'PUNKT' 50-100 cm - Bezgłośny",
+    "url": "https://decotia.pl/pl/p/Naklejany-Zegar-scienny-PUNKT-50-100-cm-Bezglosny/97",
+    "search-scope": ".main-price"
+  },
+  {
+    "name": "NYMÅNE Kinkiet z obrotowym ramieniem, biały",
+    "url": "https://www.ikea.com/pl/pl/p/nymane-kinkiet-z-obrotowym-ramieniem-bialy-10356962/",
+    "search-scope": ".pip-price__integer"
+  },
+  {
+    "name": "Plafon Nowodvorski Arena 6724 lampa oprawa sufitowa 3x20W",
+    "url": "https://www.hurtelektryczny.pl/oswietlenie-wewnetrzne/lampy-sufitowe/plafony-metalowe/plafon-lampa-oprawa-sufitowa-nowodvorski-arena-3x20w-e14-bialy-6724",
+    "search-scope": ".color"
   }
 ]

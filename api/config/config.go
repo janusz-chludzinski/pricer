@@ -21,5 +21,7 @@ func ReadConfig(configPath string) []types.ProductRequest {
 	if err != nil {
 		log.Fatal("Error parsing json: ", err)
 	}
+
+	log.Printf("%v", products)
 	return products
 }

@@ -15,8 +15,6 @@ func Parse(requests []types.ProductRequest) []*types.Product {
 	return products
 }
 
-func parseAndCollect() {}
-
 func setupCollector(product *types.Product) *colly.Collector {
 
 	collector := colly.NewCollector(colly.Async(true))

@@ -30,9 +30,8 @@ func setupCollector(product *types.Product) *colly.Collector {
 	})
 
 	collector.OnHTML(product.Request.Scope, func(e *colly.HTMLElement) {
-		log.Println("Price: ", product.Request.Name, e.Text)
+		log.Println("Price found: ", e.Text)
 		product.Price = e.Text
-
 	})
 
 	collector.OnScraped(func(r *colly.Response) {
@@ -61,3 +60,4 @@ func collectProducts(products []*types.Product) {
 		collector.Wait()
 	}
 }
+

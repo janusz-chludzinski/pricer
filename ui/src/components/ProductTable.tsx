@@ -9,20 +9,9 @@ export const ProductTable = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const rawData = await fetch("/api/products", {
-        method: "get",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      return await rawData.json();
-    };
-
-    setTimeout(() => {
-      fetchData()
-        .then((data) => setProducts(data.products))
-        .then(() => setIsLoading(false));
-    }, 1000);
+    fetchData()
+      .then((data) => setProducts(data.products))
+      .then(() => setIsLoading(false));
   }, []);
 
   if (isLoading) {
@@ -85,3 +74,12 @@ function resolveStatusIcon(errored: boolean) {
 function formatDate(date: Date) {
   return moment(date).format("DD-MM-YYYY HH:mm:ss");
 }
+
+const fetchData = async () => {
+  const rawData = await fetch("/api/products", {
+    method: "get",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  return await rawData.json();
+};

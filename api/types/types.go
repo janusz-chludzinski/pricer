@@ -12,7 +12,7 @@ type ProductRequest struct {
 
 type Product struct {
 	Request      ProductRequest `json:"request"`
-	Price        string         `json:"price"`
+	Price        float32        `json:"price"`
 	VisitedOn    time.Time      `json:"visitedOn"`
 	Errored      bool           `json:"errored"`
 	ErrorMessage string         `json:"errorMessage"`

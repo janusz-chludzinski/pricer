@@ -2,11 +2,17 @@ package parser
 
 import (
 	"log"
+	"strconv"
+	"strings"
 	"time"
+	"unicode"
 
 	"github.com/gocolly/colly"
 	"github.com/janusz-chludzinski/pricer/types"
 )
+
+const COMMA = ','
+const DOT = '.'
 
 func Parse(requests []types.ProductRequest) []*types.Product {
 	products := mapRequestsToProducts(requests)
@@ -31,7 +37,14 @@ func setupCollector(product *types.Product) *colly.Collector {
 
 	collector.OnHTML(product.Request.Scope, func(e *colly.HTMLElement) {
 		log.Println("Price found: ", e.Text)
-		product.Price = e.Text
+		price, err := convertPriceStringToFloat(e.Text)
+
+		if err != nil {
+			product.Errored = true
+			product.ErrorMessage = err.Error()
+			
+		}
+		product.Price = price
 	})
 
 	collector.OnScraped(func(r *colly.Response) {
@@ -61,3 +74,36 @@ func collectProducts(products []*types.Product) {
 	}
 }
 
+func convertPriceStringToFloat(price string) (float32, error) {
+	trimmedPrice := strings.TrimSpace(price)
+	runes := filterDigitsAndSeparators(trimmedPrice)
+	return parseStringToFloat(string(runes))
+}
+
+func convertCommaToDot(character rune) rune {
+	if character == COMMA {
+		return DOT 
+	}
+	return character
+}
+
+func filterDigitsAndSeparators(price string) []rune {
+	runes := make([]rune, 0)
+
+	for _, r := range price {
+		if unicode.IsDigit(r) || r == DOT || r == COMMA {
+			r = convertCommaToDot(r)
+			runes = append(runes, r)
+		}
+	}
+
+	return runes
+}
+
+func parseStringToFloat(price string) (float32, error) {
+	parsedPrice, err := strconv.ParseFloat(string(price), 32)
+	if err != nil {
+		return 0, err
+	}
+	return float32(parsedPrice), nil
+}

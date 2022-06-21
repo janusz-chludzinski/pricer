@@ -6,7 +6,7 @@ export type ProductRequest = {
 
 export type Product = {
   request: ProductRequest;
-  price: string;
+  price: number;
   visitedOn: Date;
   errored: boolean;
   errorMessage: string;

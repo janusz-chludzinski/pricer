@@ -65,6 +65,11 @@ func setupCollector(product *types.Product) *colly.Collector {
 
 	collector.OnScraped(func(r *colly.Response) {
 		log.Println("Finished", r.Request.URL)
+
+		if product.Price == 0 {
+			product.Errored = true
+			product.ErrorMessage = `Price equals zero. Probably not found by parser.`
+		}
 	})
 
 	return collector

@@ -45,7 +45,10 @@ export const ProductTable = () => {
                     {formatDate(product.visitedOn)}
                   </td>
                   <td className={resolveStatusIcon(product.errored)}>
-                    {productScrappingStatus(product.errored)}
+                    {productScrappingStatus(
+                      product.errored,
+                      product.errorMessage
+                    )}
                   </td>
                   <td className="text-center align-middle">
                     <button type="button" className="btn btn-primary">
@@ -61,8 +64,14 @@ export const ProductTable = () => {
   }
 };
 
-function productScrappingStatus(errored: boolean) {
-  return errored ? <ErrorIcon /> : <CheckMarkIcon />;
+function productScrappingStatus(errored: boolean, errorMessage: string) {
+  return errored ? (
+    <div title={errorMessage}>
+      <ErrorIcon />
+    </div>
+  ) : (
+    <CheckMarkIcon />
+  );
 }
 
 function resolveStatusIcon(errored: boolean) {

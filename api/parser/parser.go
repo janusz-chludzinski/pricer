@@ -21,6 +21,22 @@ func Parse(requests []types.ProductRequest) []*types.Product {
 	return products
 }
 
+func mapRequestsToProducts(requests []types.ProductRequest) []*types.Product {
+	products := make([]*types.Product, 0, len(requests))
+	for _, request := range requests {
+		products = append(products, createProduct(request))
+	}
+	return products
+}
+
+func collectProducts(products []*types.Product) {
+	for _, product := range products {
+		collector := setupCollector(product)
+		collector.Visit(product.Request.Url)
+		collector.Wait()
+	}
+}
+
 func setupCollector(product *types.Product) *colly.Collector {
 
 	collector := colly.NewCollector(colly.Async(true))
@@ -56,22 +72,6 @@ func setupCollector(product *types.Product) *colly.Collector {
 
 func createProduct(request types.ProductRequest) *types.Product {
 	return &types.Product{Request: request, VisitedOn: time.Now()}
-}
-
-func mapRequestsToProducts(requests []types.ProductRequest) []*types.Product {
-	products := make([]*types.Product, 0, len(requests))
-	for _, request := range requests {
-		products = append(products, createProduct(request))
-	}
-	return products
-}
-
-func collectProducts(products []*types.Product) {
-	for _, product := range products {
-		collector := setupCollector(product)
-		collector.Visit(product.Request.Url)
-		collector.Wait()
-	}
 }
 
 func convertPriceStringToFloat(price string) (float32, error) {
